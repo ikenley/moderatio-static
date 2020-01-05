@@ -1,0 +1,19 @@
+{
+  "name": "moderatio-static",
+  "version": "1.0.0",
+  "description": "Static website front-end for moderatio.xyz",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikenley/moderatio-static.git"
+  },
+  "author": "Ian Kenley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ikenley/moderatio-static/issues"
+  },
+  "homepage": "https://github.com/ikenley/moderatio-static#readme"
+}
