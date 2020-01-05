@@ -4,6 +4,7 @@
   "description": "Static website front-end for moderatio.xyz",
   "main": "index.js",
   "scripts": {
+    "start": "http-server -o",
     "test": "npm run test"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ikenley/moderatio-static/issues"
   },
-  "homepage": "https://github.com/ikenley/moderatio-static#readme"
+  "homepage": "https://github.com/ikenley/moderatio-static#readme",
+  "devDependencies": {
+    "http-server": "^0.12.0"
+  }
 }
