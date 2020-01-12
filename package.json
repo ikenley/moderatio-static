@@ -4,8 +4,10 @@
   "description": "Static website front-end for moderatio.xyz",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --env.prod=true",
     "start": "http-server -o",
-    "test": "npm run test"
+    "test": "npm run test",
+    "watch": "webpack --watch --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,22 @@
   },
   "homepage": "https://github.com/ikenley/moderatio-static#readme",
   "devDependencies": {
-    "http-server": "^0.12.0"
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.0",
+    "@babel/preset-react": "^7.8.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
+    "http-server": "^0.12.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "prettier": {
+    "printWidth": 120
   }
 }
