@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --env.prod=true",
+    "build-dev": "webpack",
     "start": "http-server -o",
     "test": "npm run test",
     "watch": "webpack --watch --progress --colors"

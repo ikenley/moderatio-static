@@ -18,6 +18,7 @@ class App extends Component {
                   className="btn btn-primary btn-lg"
                   href="https://github.com/ikenley/moderatio"
                   role="button"
+                  target="_blank"
                 >
                   Learn more &raquo;
                 </a>
