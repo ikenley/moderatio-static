@@ -9,6 +9,12 @@ import PageLogin from "./PageLogin";
 const propTypes = {};
 
 const Navbar = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleToggleClick = useCallback(() => {
+    setIsExpanded(!isExpanded);
+  });
+
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <a className="navbar-brand" href="#">
@@ -20,12 +26,13 @@ const Navbar = () => {
         data-toggle="collapse"
         data-target="#navbarCollapse"
         aria-controls="navbarCollapse"
-        aria-expanded="false"
+        aria-expanded={isExpanded ? "true" : "false"}
         aria-label="Toggle navigation"
+        onClick={handleToggleClick}
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse">
+      <div className={classNames("navbar-collapse", { collapse: !isExpanded })}>
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <NavLink to="/" className="nav-link" activeClassName="active" exact>
