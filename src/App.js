@@ -1,31 +1,32 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import PageMain from "./PageMain";
+import PageSignup from "./PageSignup";
+import PageLogin from "./PageLogin";
 
 const propTypes = {};
 
 const App = () => {
   return (
-    <div className="container">
-      <div className="py-5 px-3 text-center">
-        <div className="jumbotron">
-          <div className="container">
-            <h1>Open the pod bay doors, HAL</h1>
-            <p>Actual content coming soon</p>
-            <p>
-              <a
-                className="btn btn-primary btn-lg"
-                href="https://github.com/ikenley/moderatio"
-                role="button"
-                target="_blank"
-              >
-                Learn more &raquo;
-              </a>
-            </p>
-          </div>
-        </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route path="/signup">
+            <PageSignup />
+          </Route>
+          <Route path="/login">
+            <PageLogin />
+          </Route>
+          <Route path="/">
+            <PageMain />
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 };
 
