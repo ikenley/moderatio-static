@@ -3,16 +3,21 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import PageMain from "./PageMain";
-import PageSignup from "./PageSignup";
+import PageRegister from "./PageRegister";
 import PageLogin from "./PageLogin";
 
 const propTypes = {};
 
-const Navbar = () => {
+const Navbar = ({ auth }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggleClick = useCallback(() => {
     setIsExpanded(!isExpanded);
+  });
+
+  const handleLogout = useCallback(e => {
+    e.preventDefault();
+    auth.signOut();
   });
 
   return (
@@ -41,11 +46,26 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <NavLink to="/login" className="nav-link" activeClassName="active">
-              Login
-            </NavLink>
-          </li>
+          {auth.isSignedIn ? (
+            <li className="nav-item">
+              <a href="#" className="nav-link" onClick={handleLogout}>
+                Logout
+              </a>
+            </li>
+          ) : (
+            <React.Fragment>
+              <li className="nav-item">
+                <NavLink to="/login" className="nav-link" activeClassName="active">
+                  Login
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/signup" className="nav-link" activeClassName="active">
+                  Register
+                </NavLink>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </nav>

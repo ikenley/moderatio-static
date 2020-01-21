@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const propTypes = {};
 
-const PageLogin = ({ auth }) => {
+const PageRegister = ({ auth }) => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [hasRegistered, setHasRegistered] = useState(false); //Whether user has successfully registered
 
   //Form event handlers
   const handleEmailChange = useCallback(e => {
     setEmail(e.target.value);
+  });
+
+  const handleNameChange = useCallback(e => {
+    setName(e.target.value);
   });
 
   const handlePwChange = useCallback(e => {
@@ -22,12 +27,13 @@ const PageLogin = ({ auth }) => {
 
   const handleSubmit = useCallback(e => {
     e.preventDefault();
-    if (email && pw) {
-      auth.signIn(
+    if (email && name && pw) {
+      auth.register(
         email,
         pw,
+        name,
         successResult => {
-          setisLoggedIn(true);
+          setHasRegistered(true);
         },
         error => {
           setErrorMessage(error.message);
@@ -36,15 +42,16 @@ const PageLogin = ({ auth }) => {
     }
   });
 
-  //If registered successfully, redirect to main page
-  if (isLoggedIn) {
-    return <Redirect to="/main" />;
+  //If registered successfully, redirect to verify page
+  if (hasRegistered) {
+    return <Redirect to="/verify" />;
   }
 
+  //Else show registration form
   return (
     <div className="page-signup container">
       <div className="py-5 px-3 text-center">
-        <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+        <h1 className="h3 mb-3 font-weight-normal">Register</h1>
         {errorMessage ? <div className="alert alert-danger">{errorMessage}</div> : null}
         <form className="form-signin">
           <label htmlFor="inputEmail" className="sr-only">
@@ -59,6 +66,19 @@ const PageLogin = ({ auth }) => {
             autoFocus
             value={email}
             onChange={handleEmailChange}
+          />
+          <label htmlFor="inputName" className="sr-only">
+            Name
+          </label>
+          <input
+            type="text"
+            id="inputName"
+            className="form-control"
+            placeholder="Name"
+            required
+            autoFocus
+            value={name}
+            onChange={handleNameChange}
           />
           <label htmlFor="inputPassword" className="sr-only">
             Password
@@ -78,16 +98,13 @@ const PageLogin = ({ auth }) => {
             onSubmit={handleSubmit}
             onClick={handleSubmit}
           >
-            Login
+            Register
           </button>
         </form>
-        <div>
-          No account yet? Why not <Link to="/signup">Sign up</Link>?
-        </div>
       </div>
     </div>
   );
 };
 
-PageLogin.propTypes = propTypes;
-export default PageLogin;
+PageRegister.propTypes = propTypes;
+export default PageRegister;

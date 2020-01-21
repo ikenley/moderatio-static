@@ -3,26 +3,35 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import useCognitoAuth from "./useCognitoAuth";
 import PageMain from "./PageMain";
-import PageSignup from "./PageSignup";
+import PageRegister from "./PageRegister";
+import PageVerify from "./PageVerify";
 import PageLogin from "./PageLogin";
 
 const propTypes = {};
 
 const App = () => {
+  const auth = useCognitoAuth();
   return (
     <Router>
       <div>
-        <Navbar />
+        <Navbar auth={auth} />
         <Switch>
           <Route path="/signup">
-            <PageSignup />
+            <PageRegister auth={auth} />
+          </Route>
+          <Route path="/verify">
+            <PageVerify auth={auth} />
           </Route>
           <Route path="/login">
-            <PageLogin />
+            <PageLogin auth={auth} />
+          </Route>
+          <Route path="/main">
+            <PageMain auth={auth} />
           </Route>
           <Route path="/">
-            <PageMain />
+            <PageMain auth={auth} />
           </Route>
         </Switch>
       </div>
