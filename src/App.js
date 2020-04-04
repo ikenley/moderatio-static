@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import useCognitoAuth from "./auth/useCognitoAuth";
+import AxiosHelper from "./utility/AxiosHelper";
 import PageMain from "./PageMain";
 import PageRegister from "./auth/PageRegister";
 import PageVerify from "./auth/PageVerify";
 import PageLogin from "./auth/PageLogin";
 import PageRecipes from "./recipes/PageRecipes";
+
+AxiosHelper.configure();
 
 const propTypes = {};
 
@@ -35,7 +39,7 @@ const App = () => {
             <PageRecipes auth={auth} />
           </Route>
           <Route path="/">
-            <PageMain auth={auth} />
+            <PageRecipes auth={auth} />
           </Route>
         </Switch>
       </div>
