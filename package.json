@@ -20,6 +20,15 @@
     "url": "https://github.com/ikenley/moderatio-static/issues"
   },
   "homepage": "https://github.com/ikenley/moderatio-static#readme",
+  "dependencies": {
+    "amazon-cognito-identity-js": "^3.2.2",
+    "axios": "^0.19.2",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/preset-env": "^7.8.0",
@@ -29,14 +38,6 @@
     "http-server": "^0.12.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {
-    "amazon-cognito-identity-js": "^3.2.2",
-    "classnames": "^2.2.6",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2"
   },
   "prettier": {
     "printWidth": 120,
