@@ -44204,11 +44204,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Navbar */ "./src/Navbar.js");
-/* harmony import */ var _useCognitoAuth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./useCognitoAuth */ "./src/useCognitoAuth.js");
+/* harmony import */ var _auth_useCognitoAuth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth/useCognitoAuth */ "./src/auth/useCognitoAuth.js");
 /* harmony import */ var _PageMain__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PageMain */ "./src/PageMain.js");
-/* harmony import */ var _PageRegister__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PageRegister */ "./src/PageRegister.js");
-/* harmony import */ var _PageVerify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./PageVerify */ "./src/PageVerify.js");
-/* harmony import */ var _PageLogin__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PageLogin */ "./src/PageLogin.js");
+/* harmony import */ var _auth_PageRegister__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./auth/PageRegister */ "./src/auth/PageRegister.js");
+/* harmony import */ var _auth_PageVerify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth/PageVerify */ "./src/auth/PageVerify.js");
+/* harmony import */ var _auth_PageLogin__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./auth/PageLogin */ "./src/auth/PageLogin.js");
+/* harmony import */ var _recipes_PageRecipes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./recipes/PageRecipes */ "./src/recipes/PageRecipes.js");
+
 
 
 
@@ -44222,24 +44224,28 @@ __webpack_require__.r(__webpack_exports__);
 var propTypes = {};
 
 var App = function App() {
-  var auth = Object(_useCognitoAuth__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  var auth = Object(_auth_useCognitoAuth__WEBPACK_IMPORTED_MODULE_5__["default"])();
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
     auth: auth
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/signup"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PageRegister__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_PageRegister__WEBPACK_IMPORTED_MODULE_7__["default"], {
     auth: auth
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/verify"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PageVerify__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_PageVerify__WEBPACK_IMPORTED_MODULE_8__["default"], {
     auth: auth
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/login"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PageLogin__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_PageLogin__WEBPACK_IMPORTED_MODULE_9__["default"], {
     auth: auth
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/main"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PageMain__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    auth: auth
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+    path: "/recipes"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_recipes_PageRecipes__WEBPACK_IMPORTED_MODULE_10__["default"], {
     auth: auth
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     path: "/"
@@ -44253,10 +44259,178 @@ App.propTypes = propTypes;
 
 /***/ }),
 
-/***/ "./src/CognitoAuthService.js":
-/*!***********************************!*\
-  !*** ./src/CognitoAuthService.js ***!
-  \***********************************/
+/***/ "./src/Navbar.js":
+/*!***********************!*\
+  !*** ./src/Navbar.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _PageMain__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PageMain */ "./src/PageMain.js");
+/* harmony import */ var _auth_PageRegister__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth/PageRegister */ "./src/auth/PageRegister.js");
+/* harmony import */ var _auth_PageLogin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth/PageLogin */ "./src/auth/PageLogin.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var propTypes = {};
+
+var Navbar = function Navbar(_ref) {
+  var auth = _ref.auth;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isExpanded = _useState2[0],
+      setIsExpanded = _useState2[1];
+
+  var handleToggleClick = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
+    setIsExpanded(!isExpanded);
+  });
+  var handleLogout = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (e) {
+    e.preventDefault();
+    auth.signOut();
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    className: "navbar navbar-expand-md navbar-dark bg-dark mb-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "navbar-brand",
+    href: "#"
+  }, "Moderatio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "navbar-toggler",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#navbarCollapse",
+    "aria-controls": "navbarCollapse",
+    "aria-expanded": isExpanded ? "true" : "false",
+    "aria-label": "Toggle navigation",
+    onClick: handleToggleClick
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "navbar-toggler-icon"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("navbar-collapse", {
+      collapse: !isExpanded
+    })
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "navbar-nav mr-auto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/",
+    className: "nav-link",
+    activeClassName: "active",
+    exact: true
+  }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/recipes",
+    className: "nav-link",
+    activeClassName: "active",
+    exact: true
+  }, "Recipes"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "navbar-nav ml-auto"
+  }, auth.isSignedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
+    className: "nav-link",
+    onClick: handleLogout
+  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/login",
+    className: "nav-link",
+    activeClassName: "active"
+  }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/signup",
+    className: "nav-link",
+    activeClassName: "active"
+  }, "Register"))))));
+};
+
+Navbar.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (Navbar);
+
+/***/ }),
+
+/***/ "./src/PageMain.js":
+/*!*************************!*\
+  !*** ./src/PageMain.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+var propTypes = {};
+
+var PageMain = function PageMain(_ref) {
+  var auth = _ref.auth;
+  var isSignedIn = auth.isSignedIn,
+      user = auth.user;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "py-5 px-3 text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "jumbotron"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Open the pod bay doors, HAL"), isSignedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Welcome, ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "text-primary"
+  }, user.email)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You are not signed in. Considering ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/login"
+  }, "logging in"), " or, if you haven't yet,", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/signup"
+  }, "signing up"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Actual content coming soon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "btn btn-primary btn-lg",
+    href: "https://github.com/ikenley/moderatio",
+    role: "button",
+    target: "_blank"
+  }, "Learn more \xBB"))))));
+};
+
+PageMain.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (PageMain);
+
+/***/ }),
+
+/***/ "./src/auth/CognitoAuthService.js":
+/*!****************************************!*\
+  !*** ./src/auth/CognitoAuthService.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -44438,118 +44612,10 @@ function () {
 
 /***/ }),
 
-/***/ "./src/Navbar.js":
-/*!***********************!*\
-  !*** ./src/Navbar.js ***!
-  \***********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _PageMain__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PageMain */ "./src/PageMain.js");
-/* harmony import */ var _PageRegister__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageRegister */ "./src/PageRegister.js");
-/* harmony import */ var _PageLogin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PageLogin */ "./src/PageLogin.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-var propTypes = {};
-
-var Navbar = function Navbar(_ref) {
-  var auth = _ref.auth;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isExpanded = _useState2[0],
-      setIsExpanded = _useState2[1];
-
-  var handleToggleClick = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
-    setIsExpanded(!isExpanded);
-  });
-  var handleLogout = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (e) {
-    e.preventDefault();
-    auth.signOut();
-  });
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    className: "navbar navbar-expand-md navbar-dark bg-dark mb-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "navbar-brand",
-    href: "#"
-  }, "Moderatio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "navbar-toggler",
-    type: "button",
-    "data-toggle": "collapse",
-    "data-target": "#navbarCollapse",
-    "aria-controls": "navbarCollapse",
-    "aria-expanded": isExpanded ? "true" : "false",
-    "aria-label": "Toggle navigation",
-    onClick: handleToggleClick
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "navbar-toggler-icon"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("navbar-collapse", {
-      collapse: !isExpanded
-    })
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "navbar-nav mr-auto"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
-    to: "/",
-    className: "nav-link",
-    activeClassName: "active",
-    exact: true
-  }, "Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "navbar-nav ml-auto"
-  }, auth.isSignedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
-    className: "nav-link",
-    onClick: handleLogout
-  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
-    to: "/login",
-    className: "nav-link",
-    activeClassName: "active"
-  }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
-    to: "/signup",
-    className: "nav-link",
-    activeClassName: "active"
-  }, "Register"))))));
-};
-
-Navbar.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (Navbar);
-
-/***/ }),
-
-/***/ "./src/PageLogin.js":
-/*!**************************!*\
-  !*** ./src/PageLogin.js ***!
-  \**************************/
+/***/ "./src/auth/PageLogin.js":
+/*!*******************************!*\
+  !*** ./src/auth/PageLogin.js ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -44672,63 +44738,10 @@ PageLogin.propTypes = propTypes;
 
 /***/ }),
 
-/***/ "./src/PageMain.js":
-/*!*************************!*\
-  !*** ./src/PageMain.js ***!
-  \*************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-
-var propTypes = {};
-
-var PageMain = function PageMain(_ref) {
-  var auth = _ref.auth;
-  var isSignedIn = auth.isSignedIn,
-      user = auth.user;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "py-5 px-3 text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "jumbotron"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Open the pod bay doors, HAL"), isSignedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Welcome, ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "text-primary"
-  }, user.email)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You are not signed in. Considering ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/login"
-  }, "logging in"), " or, if you haven't yet,", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/signup"
-  }, "signing up"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Actual content coming soon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "btn btn-primary btn-lg",
-    href: "https://github.com/ikenley/moderatio",
-    role: "button",
-    target: "_blank"
-  }, "Learn more \xBB"))))));
-};
-
-PageMain.propTypes = propTypes;
-/* harmony default export */ __webpack_exports__["default"] = (PageMain);
-
-/***/ }),
-
-/***/ "./src/PageRegister.js":
-/*!*****************************!*\
-  !*** ./src/PageRegister.js ***!
-  \*****************************/
+/***/ "./src/auth/PageRegister.js":
+/*!**********************************!*\
+  !*** ./src/auth/PageRegister.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -44871,10 +44884,10 @@ PageRegister.propTypes = propTypes;
 
 /***/ }),
 
-/***/ "./src/PageVerify.js":
-/*!***************************!*\
-  !*** ./src/PageVerify.js ***!
-  \***************************/
+/***/ "./src/auth/PageVerify.js":
+/*!********************************!*\
+  !*** ./src/auth/PageVerify.js ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -44999,32 +45012,10 @@ PageVerify.propTypes = propTypes;
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _App_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.js */ "./src/App.js");
-
-
-
-var rootElement = document.getElementById("root");
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App_js__WEBPACK_IMPORTED_MODULE_2__["default"], null), rootElement);
-
-/***/ }),
-
-/***/ "./src/useCognitoAuth.js":
-/*!*******************************!*\
-  !*** ./src/useCognitoAuth.js ***!
-  \*******************************/
+/***/ "./src/auth/useCognitoAuth.js":
+/*!************************************!*\
+  !*** ./src/auth/useCognitoAuth.js ***!
+  \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -45037,10 +45028,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _PageMain__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PageMain */ "./src/PageMain.js");
-/* harmony import */ var _PageRegister__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageRegister */ "./src/PageRegister.js");
-/* harmony import */ var _PageLogin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PageLogin */ "./src/PageLogin.js");
-/* harmony import */ var _CognitoAuthService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CognitoAuthService */ "./src/CognitoAuthService.js");
+/* harmony import */ var _PageMain__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../PageMain */ "./src/PageMain.js");
+/* harmony import */ var _PageRegister__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageRegister */ "./src/auth/PageRegister.js");
+/* harmony import */ var _PageLogin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PageLogin */ "./src/auth/PageLogin.js");
+/* harmony import */ var _CognitoAuthService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CognitoAuthService */ "./src/auth/CognitoAuthService.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -45110,6 +45101,77 @@ function useCognitoAuth() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (useCognitoAuth);
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _App_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.js */ "./src/App.js");
+
+
+
+var rootElement = document.getElementById("root");
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App_js__WEBPACK_IMPORTED_MODULE_2__["default"], null), rootElement);
+
+/***/ }),
+
+/***/ "./src/recipes/PageRecipes.js":
+/*!************************************!*\
+  !*** ./src/recipes/PageRecipes.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+var propTypes = {};
+
+var PageRecipes = function PageRecipes(_ref) {
+  var auth = _ref.auth;
+  var isSignedIn = auth.isSignedIn,
+      user = auth.user;
+
+  if (!isSignedIn) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Redirect, {
+      to: "/main"
+    });
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "py-5 px-3 text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "jumbotron"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Recipes"), "Coming soon"))));
+};
+
+PageRecipes.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (PageRecipes);
 
 /***/ })
 

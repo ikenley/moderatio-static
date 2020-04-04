@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import PageMain from "./PageMain";
-import PageRegister from "./PageRegister";
-import PageLogin from "./PageLogin";
+import PageRegister from "./auth/PageRegister";
+import PageLogin from "./auth/PageLogin";
 
 const propTypes = {};
 
@@ -15,7 +15,7 @@ const Navbar = ({ auth }) => {
     setIsExpanded(!isExpanded);
   });
 
-  const handleLogout = useCallback(e => {
+  const handleLogout = useCallback((e) => {
     e.preventDefault();
     auth.signOut();
   });
@@ -42,6 +42,12 @@ const Navbar = ({ auth }) => {
           <li className="nav-item">
             <NavLink to="/" className="nav-link" activeClassName="active" exact>
               Home
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            {" "}
+            <NavLink to="/recipes" className="nav-link" activeClassName="active" exact>
+              Recipes
             </NavLink>
           </li>
         </ul>

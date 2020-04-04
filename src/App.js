@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import useCognitoAuth from "./useCognitoAuth";
+import useCognitoAuth from "./auth/useCognitoAuth";
 import PageMain from "./PageMain";
-import PageRegister from "./PageRegister";
-import PageVerify from "./PageVerify";
-import PageLogin from "./PageLogin";
+import PageRegister from "./auth/PageRegister";
+import PageVerify from "./auth/PageVerify";
+import PageLogin from "./auth/PageLogin";
+import PageRecipes from "./recipes/PageRecipes";
 
 const propTypes = {};
 
@@ -29,6 +30,9 @@ const App = () => {
           </Route>
           <Route path="/main">
             <PageMain auth={auth} />
+          </Route>
+          <Route path="/recipes">
+            <PageRecipes auth={auth} />
           </Route>
           <Route path="/">
             <PageMain auth={auth} />

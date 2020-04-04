@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import PageMain from "./PageMain";
+import PageMain from "../PageMain";
 import PageRegister from "./PageRegister";
 import PageLogin from "./PageLogin";
 import CognitoAuthService from "./CognitoAuthService";
@@ -17,7 +17,7 @@ function useCognitoAuth() {
   //Initialize service on first load
   useEffect(() => {
     service.current = new CognitoAuthService();
-    service.current.getUser().then(u => {
+    service.current.getUser().then((u) => {
       setUser(u);
     });
   }, []);
@@ -39,12 +39,12 @@ function useCognitoAuth() {
       email,
       password,
       () => {
-        service.current.getUser().then(u => {
+        service.current.getUser().then((u) => {
           setUser(u);
           onSuccess(u);
         });
       },
-      error => onFailure(error)
+      (error) => onFailure(error)
     );
   });
 
@@ -62,7 +62,7 @@ function useCognitoAuth() {
     register,
     verify,
     signIn,
-    signOut
+    signOut,
   };
 }
 
