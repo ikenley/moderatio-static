@@ -12,13 +12,13 @@ const _config = {
   cognito: {
     userPoolId: "us-east-1_wXDeH5iU1",
     userPoolClientId: "7bb4a44bol7f3ru4koi2mvcan5",
-    region: "us-east-1"
-  }
+    region: "us-east-1",
+  },
 };
 
 const poolData = {
   UserPoolId: _config.cognito.userPoolId,
-  ClientId: _config.cognito.userPoolClientId
+  ClientId: _config.cognito.userPoolClientId,
 };
 
 if (typeof AWSCognito !== "undefined") {
@@ -34,12 +34,12 @@ class CognitoAuthService {
   register(email, password, name, onSuccess, onFailure) {
     const dataEmail = {
       Name: "email",
-      Value: email
+      Value: email,
     };
     const attributeEmail = new CognitoUserAttribute(dataEmail);
     const dataName = {
       Name: "name",
-      Value: name
+      Value: name,
     };
     const attributeName = new CognitoUserAttribute(dataName);
 
@@ -65,20 +65,20 @@ class CognitoAuthService {
   createCognitoUser(email) {
     return new CognitoUser({
       Username: email,
-      Pool: this.userPool
+      Pool: this.userPool,
     });
   }
 
   signIn(email, password, onSuccess, onFailure) {
     var authenticationDetails = new AuthenticationDetails({
       Username: email,
-      Password: password
+      Password: password,
     });
 
     var cognitoUser = this.createCognitoUser(email);
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: onSuccess,
-      onFailure: onFailure
+      onFailure: onFailure,
     });
   }
 
@@ -86,7 +86,7 @@ class CognitoAuthService {
     this.userPool.getCurrentUser().signOut();
   }
 
-  getUser() {
+  getUserContext() {
     let promise = new Promise((resolve, reject) => {
       let user = this.userPool.getCurrentUser();
       if (user) {
@@ -99,7 +99,8 @@ class CognitoAuthService {
               reject(err.message || JSON.stringify(err));
             }
             const builtUser = this.buildUser(userData);
-            resolve(builtUser);
+            const authToken = session.getIdToken().getJwtToken();
+            resolve({ user: builtUser, authToken });
           });
         });
       } else {
@@ -114,7 +115,7 @@ class CognitoAuthService {
     //Convert array of key-value properties into object
     let userProps = {};
     if (userData.UserAttributes && userData.UserAttributes.length) {
-      userData.UserAttributes.forEach(attr => {
+      userData.UserAttributes.forEach((attr) => {
         userProps[attr.Name] = attr.Value;
       });
     }

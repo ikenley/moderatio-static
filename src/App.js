@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import axios from "axios";
@@ -12,12 +12,16 @@ import PageVerify from "./auth/PageVerify";
 import PageLogin from "./auth/PageLogin";
 import PageRecipes from "./recipes/PageRecipes";
 
-AxiosHelper.configure();
-
 const propTypes = {};
 
 const App = () => {
   const auth = useCognitoAuth();
+  const { authToken } = auth;
+
+  useLayoutEffect(() => {
+    AxiosHelper.configure(authToken);
+  }, [authToken]);
+
   return (
     <Router>
       <div>

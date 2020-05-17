@@ -46234,11 +46234,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_utility_AxiosHelper__WEBPACK_IMPORTED_MODULE_7__["default"].configure();
 var propTypes = {};
 
 var App = function App() {
   var auth = Object(_auth_useCognitoAuth__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  var authToken = auth.authToken;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
+    _utility_AxiosHelper__WEBPACK_IMPORTED_MODULE_7__["default"].configure(authToken);
+  }, [authToken]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
     auth: auth
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Route"], {
@@ -46551,8 +46554,8 @@ function () {
       this.userPool.getCurrentUser().signOut();
     }
   }, {
-    key: "getUser",
-    value: function getUser() {
+    key: "getUserContext",
+    value: function getUserContext() {
       var _this = this;
 
       var promise = new Promise(function (resolve, reject) {
@@ -46571,7 +46574,11 @@ function () {
 
               var builtUser = _this.buildUser(userData);
 
-              resolve(builtUser);
+              var authToken = session.getIdToken().getJwtToken();
+              resolve({
+                user: builtUser,
+                authToken: authToken
+              });
             });
           });
         } else {
@@ -46690,7 +46697,7 @@ var PageLogin = function PageLogin(_ref) {
     e.preventDefault();
 
     if (email && pw) {
-      auth.signIn(email, pw, function (successResult) {
+      auth.signIn(email, pw, function () {
         setisLoggedIn(true);
       }, function (error) {
         setErrorMessage(error.message);
@@ -47070,17 +47077,27 @@ function useCognitoAuth() {
       user = _useState2[0],
       setUser = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      authToken = _useState4[0],
+      setAuthToken = _useState4[1];
+
   var service = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(); //Initialize service on first load
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     service.current = new _CognitoAuthService__WEBPACK_IMPORTED_MODULE_7__["default"]();
-    service.current.getUser().then(function (u) {
-      setUser(u);
-    });
+    handleAuthChange();
   }, []);
-  var getAuthToken = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
-    return service.current.getAuthToken();
-  });
+
+  var handleAuthChange = function handleAuthChange() {
+    service.current.getUserContext().then(function (result) {
+      var u = result ? result.user : null;
+      var aToken = result ? result.authToken : null;
+      setUser(u);
+      setAuthToken(aToken);
+    });
+  };
+
   var register = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (email, password, name, onSuccess, onFailure) {
     service.current.register(email, password, name, onSuccess, onFailure);
   });
@@ -47089,10 +47106,8 @@ function useCognitoAuth() {
   });
   var signIn = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (email, password, onSuccess, onFailure) {
     service.current.signIn(email, password, function () {
-      service.current.getUser().then(function (u) {
-        setUser(u);
-        onSuccess(u);
-      });
+      handleAuthChange();
+      onSuccess(user);
     }, function (error) {
       return onFailure(error);
     });
@@ -47104,9 +47119,9 @@ function useCognitoAuth() {
 
   var s = service.current || {};
   return {
-    isSignedIn: user ? true : false,
+    isSignedIn: authToken ? true : false,
     user: user,
-    getAuthToken: getAuthToken,
+    authToken: authToken,
     register: register,
     verify: verify,
     signIn: signIn,
@@ -47187,10 +47202,12 @@ var PageRecipes = function PageRecipes(_ref) {
 
   var modal = Object(_utility_useModal__WEBPACK_IMPORTED_MODULE_5__["default"])(false);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/api/v1/recipes").then(function (result) {
-      setRecipes(result.data);
-    });
-  }, []);
+    if (auth.isSignedIn) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("api/v1/recipes").then(function (result) {
+        setRecipes(result.data);
+      });
+    }
+  }, [auth]);
 
   if (!isSignedIn) {
     return null;
@@ -47241,8 +47258,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  configure: function configure() {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = location.hostname.startsWith("localhost") ? "https://localhost:5001" : "";
+  configure: function configure(authToken) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = location.hostname.startsWith("localhost") ? "https://l40yord0fh.execute-api.us-east-1.amazonaws.com/Prod" //"https://localhost:5001"
+    : "https://l40yord0fh.execute-api.us-east-1.amazonaws.com/Prod";
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers = {
+      Authorization: authToken ? authToken : null
+    };
   }
 });
 

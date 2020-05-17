@@ -13,10 +13,12 @@ const PageRecipes = ({ auth }) => {
   const modal = useModal(false);
 
   useEffect(() => {
-    axios.get("/api/v1/recipes").then((result) => {
-      setRecipes(result.data);
-    });
-  }, []);
+    if (auth.isSignedIn) {
+      axios.get("api/v1/recipes").then((result) => {
+        setRecipes(result.data);
+      });
+    }
+  }, [auth]);
 
   if (!isSignedIn) {
     return null;

@@ -12,19 +12,23 @@ import CognitoAuthService from "./CognitoAuthService";
 
 function useCognitoAuth() {
   const [user, setUser] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
   const service = useRef();
 
   //Initialize service on first load
   useEffect(() => {
     service.current = new CognitoAuthService();
-    service.current.getUser().then((u) => {
-      setUser(u);
-    });
+    handleAuthChange();
   }, []);
 
-  const getAuthToken = useCallback(() => {
-    return service.current.getAuthToken();
-  });
+  const handleAuthChange = () => {
+    service.current.getUserContext().then((result) => {
+      const u = result ? result.user : null;
+      const aToken = result ? result.authToken : null;
+      setUser(u);
+      setAuthToken(aToken);
+    });
+  };
 
   const register = useCallback((email, password, name, onSuccess, onFailure) => {
     service.current.register(email, password, name, onSuccess, onFailure);
@@ -39,10 +43,8 @@ function useCognitoAuth() {
       email,
       password,
       () => {
-        service.current.getUser().then((u) => {
-          setUser(u);
-          onSuccess(u);
-        });
+        handleAuthChange();
+        onSuccess(user);
       },
       (error) => onFailure(error)
     );
@@ -55,10 +57,11 @@ function useCognitoAuth() {
 
   //TODO fix this binding on functions
   const s = service.current || {};
+
   return {
-    isSignedIn: user ? true : false,
+    isSignedIn: authToken ? true : false,
     user: user,
-    getAuthToken,
+    authToken,
     register,
     verify,
     signIn,

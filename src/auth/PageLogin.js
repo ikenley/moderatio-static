@@ -12,24 +12,24 @@ const PageLogin = ({ auth }) => {
   const [isLoggedIn, setisLoggedIn] = useState(false);
 
   //Form event handlers
-  const handleEmailChange = useCallback(e => {
+  const handleEmailChange = useCallback((e) => {
     setEmail(e.target.value);
   });
 
-  const handlePwChange = useCallback(e => {
+  const handlePwChange = useCallback((e) => {
     setPw(e.target.value);
   });
 
-  const handleSubmit = useCallback(e => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     if (email && pw) {
       auth.signIn(
         email,
         pw,
-        successResult => {
+        () => {
           setisLoggedIn(true);
         },
-        error => {
+        (error) => {
           setErrorMessage(error.message);
         }
       );
