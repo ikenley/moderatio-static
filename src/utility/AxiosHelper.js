@@ -7,7 +7,7 @@ export default {
       : "https://l40yord0fh.execute-api.us-east-1.amazonaws.com/Prod";
 
     axios.defaults.headers = {
-      Authorization: authToken ? authToken : null,
+      Authorization: `Bearer ${authToken ? authToken : null}`,
     };
   },
 };
