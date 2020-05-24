@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 import useModal from "../utility/useModal";
+import CreateRecipeModal from "./CreateRecipeModal";
 
 const propTypes = {};
 
@@ -32,7 +34,7 @@ const PageRecipes = ({ auth }) => {
           Functionality coming soon
         </div>
       </div>
-      <button className="btn btn-lg btn-primary rounded-0 mb-3" onClick={() => modal.open()}>
+      <button className="btn btn-lg btn-primary rounded-0 mb-3" onClick={modal.open}>
         <i className="fas fa-plus"></i> Create
       </button>
       {recipes && (
@@ -46,7 +48,7 @@ const PageRecipes = ({ auth }) => {
           ))}
         </div>
       )}
-      {modal.show ? "show" : "hide"}
+      <CreateRecipeModal modal={modal} />
     </div>
   );
 };
