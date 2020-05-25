@@ -12,15 +12,27 @@ const propTypes = {};
 const PageRecipes = ({ auth }) => {
   const { isSignedIn, user } = auth;
   const [recipes, setRecipes] = useState(null);
-  const modal = useModal(false);
+  const modal = useModal(true);
+
+  const getRecipes = () => {
+    axios.get("api/v1/recipes").then((result) => {
+      setRecipes(result.data);
+    });
+  };
 
   useEffect(() => {
     if (auth.isSignedIn) {
-      axios.get("api/v1/recipes").then((result) => {
-        setRecipes(result.data);
-      });
+      getRecipes();
     }
   }, [auth]);
+
+  const handleCreate = useCallback((recipe) => {
+    if (auth.isSignedIn) {
+      axios.post("api/v1/recipes", recipe).then(() => {
+        getRecipes();
+      });
+    }
+  });
 
   if (!isSignedIn) {
     return null;
@@ -48,7 +60,7 @@ const PageRecipes = ({ auth }) => {
           ))}
         </div>
       )}
-      <CreateRecipeModal modal={modal} />
+      <CreateRecipeModal modal={modal} handleCreate={handleCreate} />
     </div>
   );
 };

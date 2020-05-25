@@ -50359,7 +50359,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Modal */ "./node_modules/react-bootstrap/esm/Modal.js");
-/* harmony import */ var _utility_useModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utility/useModal */ "./src/utility/useModal.js");
+/* harmony import */ var _utility_useInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utility/useInput */ "./src/utility/useInput.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -50368,25 +50378,101 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var propTypes = {
-  modal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+  modal: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  handleCreate: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
 };
+var MAX_FILE_SIZE = 10000000;
 
 var CreateRecipeModal = function CreateRecipeModal(_ref) {
-  var modal = _ref.modal;
+  var modal = _ref.modal,
+      handleCreate = _ref.handleCreate;
+  var nameInput = Object(_utility_useInput__WEBPACK_IMPORTED_MODULE_6__["default"])("");
+  var urlInput = Object(_utility_useInput__WEBPACK_IMPORTED_MODULE_6__["default"])("");
+  var descInput = Object(_utility_useInput__WEBPACK_IMPORTED_MODULE_6__["default"])("");
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      imageName = _useState2[0],
+      setImageName = _useState2[1];
+
+  var fileInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
+  var handleCreateClick = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function () {
+    var recipe = {
+      name: nameInput.value,
+      url: urlInput.value,
+      description: descInput.value,
+      imageName: imageName
+    };
+
+    if (recipe.name && recipe.url) {
+      handleCreate(recipe);
+      modal.close();
+    }
+  }, [nameInput, urlInput, descInput, imageName]);
+  var handleFileChange = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (e) {
+    var file = fileInput.current.files[0];
+
+    if (file.size > MAX_FILE_SIZE) {
+      alert("Max file size exceeded");
+      return;
+    }
+
+    setImageName(file.name);
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "create-recipe-modal"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
     show: modal.show,
     onHide: modal.close
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Header, {
     closeButton: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Title, null, "Modal heading")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Body, null, "Woohoo, you're reading this text in a modal!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Title, null, "Modal heading")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "create-recipe-modal-name",
+    className: "col-sm-2 col-form-label text-right"
+  }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-10"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    id: "reate-recipe-modal-name"
+  }, nameInput)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "create-recipe-modal-url",
+    className: "col-sm-2 col-form-label text-right"
+  }, "URL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-10"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", _extends({
+    type: "text",
+    className: "form-control",
+    id: "reate-recipe-modal-url"
+  }, urlInput)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group row"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "create-recipe-modal-desc",
+    className: "col-sm-2 col-form-label text-right"
+  }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-10"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", _extends({
+    rows: "4",
+    type: "text",
+    className: "form-control",
+    id: "reate-recipe-modal-desc"
+  }, descInput)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file",
+    ref: fileInput,
+    onChange: handleFileChange,
+    accept: "image/jpeg,image/png"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_5__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-secondary",
     onClick: modal.close
   }, "Close"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-primary",
-    onClick: modal.close
-  }, "Save Changes"))));
+    onClick: handleCreateClick
+  }, "Create"))));
 };
 
 CreateRecipeModal.propTypes = propTypes;
@@ -50443,14 +50529,26 @@ var PageRecipes = function PageRecipes(_ref) {
       recipes = _useState2[0],
       setRecipes = _useState2[1];
 
-  var modal = Object(_utility_useModal__WEBPACK_IMPORTED_MODULE_6__["default"])(false);
+  var modal = Object(_utility_useModal__WEBPACK_IMPORTED_MODULE_6__["default"])(true);
+
+  var getRecipes = function getRecipes() {
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("api/v1/recipes").then(function (result) {
+      setRecipes(result.data);
+    });
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (auth.isSignedIn) {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("api/v1/recipes").then(function (result) {
-        setRecipes(result.data);
-      });
+      getRecipes();
     }
   }, [auth]);
+  var handleCreate = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (recipe) {
+    if (auth.isSignedIn) {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("api/v1/recipes", recipe).then(function () {
+        getRecipes();
+      });
+    }
+  });
 
   if (!isSignedIn) {
     return null;
@@ -50479,7 +50577,8 @@ var PageRecipes = function PageRecipes(_ref) {
       className: "card-title text-center my-2"
     }, r.name)));
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateRecipeModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    modal: modal
+    modal: modal,
+    handleCreate: handleCreate
   }));
 };
 
@@ -50508,6 +50607,45 @@ __webpack_require__.r(__webpack_exports__);
     };
   }
 });
+
+/***/ }),
+
+/***/ "./src/utility/useInput.js":
+/*!*********************************!*\
+  !*** ./src/utility/useInput.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return useInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+ // Hook for handling form input state
+
+function useInput(initialValue) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(initialValue),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var onChange = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (e) {
+    return setValue(e.target.value);
+  }, [value]);
+  return {
+    value: value,
+    onChange: onChange
+  };
+}
 
 /***/ }),
 
